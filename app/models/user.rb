@@ -4,6 +4,8 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable, :confirmable, :authentication_keys => [:login]
 
+  has_many :wikis
+
   attr_accessor :login
 
   # Override Devise Lookup on login
@@ -14,5 +16,23 @@ class User < ActiveRecord::Base
     elsif conditions.has_key?(:username) || conditions.has_key?(:email)
       where(conditions.to_hash).first
     end
+  end
+
+  after_initialize :set_role
+
+  def admin?
+    role == 'admin'
+  end
+
+  def premium?
+    role == 'premium'
+  end
+
+  def public?
+    role == 'public'
+  end
+
+  def set_role
+    self.role ||= 'public'
   end
 end
