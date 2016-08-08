@@ -1,5 +1,9 @@
 class WikisController < ApplicationController
 
+  def public
+   @wikis = Wiki.where('private = ?', false)
+  end
+
   def user_wikis
     @wikis = current_user.own_wikis
   end

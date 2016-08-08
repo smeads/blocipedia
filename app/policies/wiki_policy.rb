@@ -1,6 +1,18 @@
 class WikiPolicy < ApplicationPolicy
 
-  class Scope < Scope
+  def index?
+    true
+  end
+
+  def show?
+    if user
+      (user.role == 'admin') || record.users.include?(user) || (user == record.user) || (record.private == false)
+    else
+      record.private == false
+    end
+  end
+
+class Scope < Scope
     attr_reader :user, :scope
 
     def initializer(user, scope)
@@ -8,27 +20,18 @@ class WikiPolicy < ApplicationPolicy
       @scope = scope
     end
 
-    def resolve
-      wikis = []
-      if @user.admin?
-        wikis = scope.all
-      elsif @user.premium?
-        all_wikis = scope.all
-        all_wikis.each do |wiki|
-          if !wiki.private? || wiki.user_id == @user || wiki.users.include?(@user)
-            wikis << wiki
-          end
-        end
-      else
-        all_wikis = scope.all
-        wikis = []
-        all_wikis.each do |wiki|
-          if !wiki.private? || wiki.users.include?(@user)
-            wikis << wiki
-          end
-        end
-      end
-      wikis
-    end
+  def resolve
+
+   if user == nil
+     scope.where(private: false).order('wikis.created_at DESC')
+   elsif user.role == "admin"
+     scope.all.order('wikis.created_at DESC')
+   elsif user.role == "premium"
+     scope.where(private: true).order('wikis.created_at DESC')
+     scope.all.order('wikis.created_at DESC')
+   else
+     scope.where(private: false).order('wikis.created_at DESC')
+   end
   end
+ end
 end

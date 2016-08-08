@@ -25,7 +25,7 @@ class ChargesController < ApplicationController
 
    current_user.update_attributes!( role: 'premium')
 
-   flash[:notice] = "Thanks for upgrading your account to premium, #{current_user.username}!"
+   flash[:notice] = "Thanks for upgrading to a premium account, #{current_user.username}!"
 
    redirect_to wikis_path
 
