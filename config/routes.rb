@@ -3,16 +3,14 @@ Rails.application.routes.draw do
   devise_for :users, controllers: { sessions: 'users/sessions' }
 
   resources :wikis
+  resources :collaborators, only: [:create, :destroy]
+
   resources :charges, only: [:new, :create]
   resources :downgrades, only: [:update]
 
-  resources :users do
-    collection do
-      get "upgrade"
-    end
-    post "toggle_role"
-    post "go_public"
-  end
+
+
+  resources :users
 
   get 'about' => 'welcome#about'
 

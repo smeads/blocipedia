@@ -27,8 +27,8 @@ class Scope < Scope
    elsif user.role == "admin"
      scope.all.order('wikis.created_at DESC')
    elsif user.role == "premium"
-     scope.where(private: true).order('wikis.created_at DESC')
-     scope.all.order('wikis.created_at DESC')
+     scope.eager_load(:collaborators)
+        .where("wikis.user_id = ? OR private = ? OR collaborators.user_id = ?", user, false, user).order('wikis.created_at DESC')
    else
      scope.where(private: false).order('wikis.created_at DESC')
    end

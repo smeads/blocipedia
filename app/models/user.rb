@@ -4,6 +4,8 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable, :confirmable, :authentication_keys => [:login]
 
+  has_many :collaborators
+  has_many :collaborations, through: :collaborators, source: :wiki
   has_many :wikis
 
   attr_accessor :login
