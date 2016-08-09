@@ -66,6 +66,8 @@ GEM
     diff-lcs (1.2.5)
     domain_name (0.5.20160615)
       unf (>= 0.0.5, < 1.0.0)
+    epic-editor-rails (0.2.4)
+      railties (>= 3.2, < 5.0)
     erubis (2.7.0)
     execjs (2.7.0)
     factory_girl (4.7.0)
@@ -221,6 +223,7 @@ DEPENDENCIES
   byebug
   coffee-rails (~> 4.1.0)
   devise
+  epic-editor-rails
   factory_girl_rails
   faker
   figaro (= 1.0)

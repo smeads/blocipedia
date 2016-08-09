@@ -3,7 +3,7 @@
       <%= f.label :title %>
       <%= f.text_field :title, class: 'form-control', placeholder: "Enter wiki title" %>
     </div>
-    <div class="form-group">
+    <div class="form-group", id="epiceditor">
       <%= f.label :body %>
       <%= f.text_area :body, rows: 8, class: 'form-control', placeholder: "Enter wiki body" %>
     </div>
@@ -15,6 +15,11 @@
       </div>
     <% end %>
     <div class="form-group">
+   <div style="margin-top:35px;">
       <%= f.submit "Save", class: 'btn btn-success' %>
-    </div>
+   </div>
 <% end %>
+
+<script src="epiceditor.min.js">
+  var editor = new EpicEditor().load();
+</script>
