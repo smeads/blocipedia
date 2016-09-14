@@ -26,7 +26,7 @@ Blocipedia utalizes [Stripe](https://stripe.com/) to charge users before switchi
 Using [Redcarpet](https://github.com/vmg/redcarpet) Blocipedia gives users the ability to use Markdown syntax.
 
 #### Video Walk Through
-<iframe width="560" height="315" src="https://www.youtube.com/embed/YslWc2Lvc3E" frameborder="0" allowfullscreen></iframe>
+https://www.youtube.com/embed/YslWc2Lvc3E
 
 #### Heroku Link
 [Blocipedia](https://arcane-depths-91867.herokuapp.com)
