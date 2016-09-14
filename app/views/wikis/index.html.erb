@@ -1,4 +1,7 @@
+<br>
+<div class='jumbotron'>
 <h1>All Wikis</h1>
+</div>
 
 <% if policy(Wiki.new).create? %>
   <%= link_to "New Wiki", new_wiki_path(), class: 'btn btn-success' %>

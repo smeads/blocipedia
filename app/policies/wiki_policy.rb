@@ -22,9 +22,9 @@ class Scope < Scope
 
   def resolve
 
-   if user.role == "admin"
+   if user == 'admin'
      scope.all.order('wikis.created_at DESC')
-   elsif user.role == "premium"
+   elsif user == 'premium'
      scope.eager_load(:collaborators)
         .where("wikis.user_id = ? OR private = ? OR collaborators.user_id = ?", user, false, user).order('wikis.created_at DESC')
    elsif user == (:collaborators)
